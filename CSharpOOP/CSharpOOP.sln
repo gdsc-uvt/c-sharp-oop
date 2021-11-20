@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpOOP", "CSharpOOP\CSha
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DanPercic", "DanPercic\DanPercic.csproj", "{312891DC-17A9-4AB3-B704-AC5D81EEF6C7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BregaStanislav", "BregaStanislav\BregaStanislav.csproj", "{B1079B45-ADA0-4F70-AEA5-9019995DEDFE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{312891DC-17A9-4AB3-B704-AC5D81EEF6C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{312891DC-17A9-4AB3-B704-AC5D81EEF6C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{312891DC-17A9-4AB3-B704-AC5D81EEF6C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1079B45-ADA0-4F70-AEA5-9019995DEDFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1079B45-ADA0-4F70-AEA5-9019995DEDFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1079B45-ADA0-4F70-AEA5-9019995DEDFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1079B45-ADA0-4F70-AEA5-9019995DEDFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
