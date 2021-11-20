@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DanPercic", "DanPercic\DanP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BregaStanislav", "BregaStanislav\BregaStanislav.csproj", "{B1079B45-ADA0-4F70-AEA5-9019995DEDFE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneaRazvan", "OneaRazvan\OneaRazvan.csproj", "{FE025EFE-23F0-48F6-A3A7-1CF26FD63076}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{B1079B45-ADA0-4F70-AEA5-9019995DEDFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1079B45-ADA0-4F70-AEA5-9019995DEDFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1079B45-ADA0-4F70-AEA5-9019995DEDFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE025EFE-23F0-48F6-A3A7-1CF26FD63076}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE025EFE-23F0-48F6-A3A7-1CF26FD63076}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE025EFE-23F0-48F6-A3A7-1CF26FD63076}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE025EFE-23F0-48F6-A3A7-1CF26FD63076}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
