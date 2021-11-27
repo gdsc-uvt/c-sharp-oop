@@ -1,59 +1,121 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace BregaStanislav
-{
+namespace BregaStanislav {
 
-    class Animal
-    {
+    class PhotoAlbum {
 
-        private string name;
-        public string color;
+        private int numberOfPages;
 
-        public string GetName()
-        {
+        public PhotoAlbum() {
 
-            return name;
+            numberOfPages = 16;
 
         }
 
-        public void SetName(string newName)
-        {
+        public PhotoAlbum(int numberOfPages) {
 
-            name = newName + '*';
+            this.numberOfPages = numberOfPages;
+
+        }
+
+        public int GetNumberOfPages() {
+
+            return numberOfPages;
+
+        }
+
+    }
+
+    class BigPhotoAlbum {
+
+        private int numberOfPages;
+        private int numberOfPhotosOnPage = 0;
+
+        public BigPhotoAlbum() {
+
+            numberOfPages = 64;
+            
+        }
+        
+        public BigPhotoAlbum(int numberOfPages) {
+
+            this.numberOfPages = numberOfPages;
+            
+        }
+        
+        public int GetNumberOfPages() {
+
+            return numberOfPages;
+
+        }
+
+        private void AddPage() {
+
+            numberOfPages++;
+
+        }
+
+        public void AddPhoto() {
+
+            numberOfPhotosOnPage++;
+
+            if (numberOfPhotosOnPage % 4 != 0) 
+                return;
+
+            AddPage();
+            numberOfPhotosOnPage = 0;
+
+        }
+
+    }
+
+    class Program {
+
+        private static void Main() {
+
+            const int numberOfAlbums = 7;
+            var myAlbum = new List<PhotoAlbum>();
+            var myBigAlbum = new List<BigPhotoAlbum>();
+
+            var random = new Random();
+
+            for (var i = 0; i < numberOfAlbums; ++i) {
+
+                myAlbum.Add(new PhotoAlbum(random.Next(1, 17)));
+                myBigAlbum.Add(new BigPhotoAlbum(random.Next(17, 65)));
+                
+            }
+
+            for (var i = 0; i < numberOfAlbums; ++i)
+                Console.Write("{0} ", myAlbum[i].GetNumberOfPages());
+            
+            Console.WriteLine();
+            
+            for (var i = 0; i < numberOfAlbums; ++i)
+                Console.Write("{0} ", myBigAlbum[i].GetNumberOfPages());
+
+            var minIndex = 0;
+
+            for (var i = 0; i < numberOfAlbums; ++i)
+                if (myBigAlbum[i].GetNumberOfPages() < myBigAlbum[minIndex].GetNumberOfPages())
+                    minIndex = i;
+
+            for (var i = 0; i < 4; ++i)
+                myBigAlbum[minIndex].AddPhoto();
+            
+            Console.WriteLine();
+            
+            for (var i = 0; i < numberOfAlbums; ++i)
+                Console.Write("{0} ", myAlbum[i].GetNumberOfPages());
+            
+            Console.WriteLine();
+            
+            for (var i = 0; i < numberOfAlbums; ++i)
+                Console.Write("{0} ", myBigAlbum[i].GetNumberOfPages());
 
         }
         
-        public Animal(string name)
-        {
-            
-            this.name = name.ToUpper();
-            color = "black";
-            Console.WriteLine("new object");
-            
-        }
-
-        public Animal(string name, string color)
-        {
-            
-            this.name = name;
-            this.color = color;
-            Console.WriteLine("new object");
-            
-        }
-
     }
-    class Program
-    {
-        static void Main(string[] args)
-        {
-
-            var cat = new Animal("Tom");
-            var dog = new Animal("Bobby", "White");
-            dog.SetName("NewName");
-            
-            Console.WriteLine(cat.GetName() + ' ' + cat.color);
-            Console.WriteLine(dog.GetName() + ' ' + dog.color);
-
-        }
-    }
+    
 }
