@@ -1,121 +1,67 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BregaStanislav {
+namespace BregaStanislav
+{
 
-    class PhotoAlbum {
+    
+    class Program
+    {
+        static void Main(string[] args)
+        {
 
-        private int numberOfPages;
+            // var cat = new Animal("Tom");
+            // var dog = new Animal("Bobby", "White");
+            // dog.SetName("NewName");
+            //
+            // Console.WriteLine(cat.GetName() + ' ' + cat.color);
+            // Console.WriteLine(dog.GetName() + ' ' + dog.color);
 
-        public PhotoAlbum() {
+            var cat = new Cat("Tom");
+            // Console.WriteLine(cat.ToString());
+            // cat.Sound();
+            var catWithName = new Cat("new Tom", "Black");
 
-            numberOfPages = 16;
+            var dog = new Dog("Some dog", "Tommy");
+            // dog.Sound();
+            // Console.WriteLine(dog.GetName());
 
-        }
+            var unknownAnimal = new Animal("Unknown");
+            var dogAsAnimal = (Animal) dog;
 
-        public PhotoAlbum(int numberOfPages) {
+            var animals = new List<Animal> {unknownAnimal, dogAsAnimal, cat};
 
-            this.numberOfPages = numberOfPages;
+            foreach (var animal in animals) {
 
-        }
+                Console.WriteLine();
+                Console.WriteLine(animal.ToString());
+                animal.Sound();
 
-        public int GetNumberOfPages() {
-
-            return numberOfPages;
-
-        }
-
-    }
-
-    class BigPhotoAlbum {
-
-        private int numberOfPages;
-        private int numberOfPhotosOnPage = 0;
-
-        public BigPhotoAlbum() {
-
-            numberOfPages = 64;
-            
-        }
-        
-        public BigPhotoAlbum(int numberOfPages) {
-
-            this.numberOfPages = numberOfPages;
-            
-        }
-        
-        public int GetNumberOfPages() {
-
-            return numberOfPages;
-
-        }
-
-        private void AddPage() {
-
-            numberOfPages++;
-
-        }
-
-        public void AddPhoto() {
-
-            numberOfPhotosOnPage++;
-
-            if (numberOfPhotosOnPage % 4 != 0) 
-                return;
-
-            AddPage();
-            numberOfPhotosOnPage = 0;
-
-        }
-
-    }
-
-    class Program {
-
-        private static void Main() {
-
-            const int numberOfAlbums = 7;
-            var myAlbum = new List<PhotoAlbum>();
-            var myBigAlbum = new List<BigPhotoAlbum>();
-
-            var random = new Random();
-
-            for (var i = 0; i < numberOfAlbums; ++i) {
-
-                myAlbum.Add(new PhotoAlbum(random.Next(1, 17)));
-                myBigAlbum.Add(new BigPhotoAlbum(random.Next(17, 65)));
+                if (animal is Dog usualDog) {
+                    
+                    Console.WriteLine("It's a DOG!");
+                    Console.WriteLine("Has an owner: {0}", usualDog.GetOwner());
+                    
+                }
+                else if (animal is Cat) {
+                    
+                    Console.WriteLine("It's a Cat!");
+                    
+                }
                 
             }
-
-            for (var i = 0; i < numberOfAlbums; ++i)
-                Console.Write("{0} ", myAlbum[i].GetNumberOfPages());
             
             Console.WriteLine();
-            
-            for (var i = 0; i < numberOfAlbums; ++i)
-                Console.Write("{0} ", myBigAlbum[i].GetNumberOfPages());
 
-            var minIndex = 0;
+            var mammals = new List<IMammal> {dog, cat};
 
-            for (var i = 0; i < numberOfAlbums; ++i)
-                if (myBigAlbum[i].GetNumberOfPages() < myBigAlbum[minIndex].GetNumberOfPages())
-                    minIndex = i;
+            foreach (var mammal in mammals) {
 
-            for (var i = 0; i < 4; ++i)
-                myBigAlbum[minIndex].AddPhoto();
-            
-            Console.WriteLine();
-            
-            for (var i = 0; i < numberOfAlbums; ++i)
-                Console.Write("{0} ", myAlbum[i].GetNumberOfPages());
-            
-            Console.WriteLine();
-            
-            for (var i = 0; i < numberOfAlbums; ++i)
-                Console.Write("{0} ", myBigAlbum[i].GetNumberOfPages());
+                mammal.GiveBirth();
+                Console.WriteLine(mammal.Children);
+
+            }
 
         }
-        
     }
-    
 }
