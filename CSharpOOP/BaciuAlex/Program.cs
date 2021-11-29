@@ -1,46 +1,9 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System;
+using System.Collections.Generic;
 
 namespace BaciuAlex
 {
-    class Animal
-    {
-        private string name;
-        public string color;
-
-        public Animal(string name)
-        {
-            this.name = name;
-            this.color = "black";
-        }
-        
-        public Animal(string name, string color)
-        {
-            this.name = name;
-            this.color = color;
-        }
-
-        public string GetName()
-        {
-            return name;
-        }
-
-        public void setName(string name)
-        {
-            this.name = name;
-        }
-
-        public override string ToString()
-        {
-            return "Animal: " + name + " " + color;
-        }
-        
-        ~Animal()
-        {
-            Console.WriteLine("Destructor");
-        }
-    }
-
     class PhotoAlbum
     {
         private int numberOfPages;
@@ -83,7 +46,7 @@ namespace BaciuAlex
     
     class Program
     {
-        static void Main(string[] args)
+        static void Photo()
         {
             PhotoAlbum photo1 = new PhotoAlbum(10);
             PhotoAlbum photo2 = new PhotoAlbum(20);
@@ -128,7 +91,54 @@ namespace BaciuAlex
                 Console.WriteLine("Albumul are " + photo.GetNumberOfPages() + " pagini");
             }
         }
+        static void Main(string[] args)
+        {
+            var cat = new Cat("Pisica");
+            var cat2 = new Cat("Pisica", "alba");
+            
+            cat.AnimalSound();
+
+            var dog = new Dog("Sasha", "White", "Eu");
+            dog.AnimalSound();
+            dog.GetName();
+
+            var unknownAnimal = new Animal("Unknown");
+            var dogAsAnimal = dog as Animal;
+
+            var animals = new List<Animal> {unknownAnimal, dogAsAnimal, cat, new Animal {Alias = "ceva"}};
+
+            foreach (var animal in animals)
+            {
+                Console.WriteLine(animal.GetName());
+                animal.AnimalSound();
+
+                if (animal is Dog)
+                {
+                    Console.WriteLine("Caine");
+                    Console.WriteLine(((Dog)animal).owner);
+                    Console.WriteLine(animal.ToString());
+                }
+                else if(animal is Cat usualCat)
+                {
+                    Console.WriteLine("Pisica");
+                }
+                else
+                {
+                    Console.WriteLine("Unknown animal!");
+                }
+            }
+            
+            var mamals = new List<IMamal> { dog, cat };
+            
+            foreach (var mamal in mamals)
+            {
+                mamal.GiveBirth();
+                Console.WriteLine(mamal.Children);
+            }
+            
+            Console.WriteLine(dog.Children);
+            Console.WriteLine(cat.Children);
+        }
     }
-    
-    
+
 }
