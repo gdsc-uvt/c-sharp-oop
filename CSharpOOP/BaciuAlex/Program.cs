@@ -91,6 +91,69 @@ namespace BaciuAlex
                 Console.WriteLine("Albumul are " + photo.GetNumberOfPages() + " pagini");
             }
         }
+
+        static public void Tema2()
+        {
+            Librarian librarian1 = new Librarian();
+            Librarian librarian2 = new Librarian();
+            Librarian librarian3 = new Librarian();
+            
+            Author author1 = new Author();
+            Author author2 = new Author();
+            Author author3 = new Author();
+
+            var publications = new List<Publication>();
+            
+            publications.Add(author1.GetPublication());
+            publications.Add(author1.GetPublication());
+            publications.Add(author1.GetPublication());
+            
+            publications.Add(author2.GetPublication());
+            publications.Add(author2.GetPublication());
+            publications.Add(author2.GetPublication());
+            
+            publications.Add(author3.GetPublication());
+            publications.Add(author3.GetPublication());
+            publications.Add(author3.GetPublication());
+
+            var entities = new List<Entity>()
+            {
+                librarian1, librarian2, librarian3,
+                author1, author2, author3,
+            };
+            
+            entities.AddRange(publications);
+
+            foreach (var entity in entities)
+            {
+                Console.WriteLine("Id: " + entity.Id);
+
+                if (entity is Librarian)
+                {
+                    var entity2 = entity as Librarian;
+                    entity2.Work();
+                    Console.WriteLine();
+                }
+                
+                if (entity is Author)
+                {
+                    var entity2 = entity as Author;
+                    entity2.Work();
+                    Console.WriteLine();
+                }
+
+                if (entity is Publication)
+                {
+                    var entity2 = entity as Publication;
+                    Console.WriteLine("Titlul publicatiei: " + entity2.Title);
+                    Console.WriteLine("Autorul publicatiei: " + entity2.Author.Name);
+                    Console.WriteLine("Data crearii publicatiei: " + entity2.Created);
+                    Console.WriteLine();
+                }
+                    
+            }
+        }
+
         static void Main(string[] args)
         {
             var cat = new Cat("Pisica");
@@ -138,6 +201,8 @@ namespace BaciuAlex
             
             Console.WriteLine(dog.Children);
             Console.WriteLine(cat.Children);
+
+            Tema2();
         }
     }
 
