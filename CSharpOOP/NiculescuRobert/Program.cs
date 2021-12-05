@@ -1,51 +1,174 @@
 ﻿using System;
-using System.Security.Authentication.ExtendedProtection;
+using System.Collections.Generic;
 
 namespace NiculescuRobert
 {
-    class Animal
+    abstract class  Entity
+    {   
+        public static Random rnd=new Random();
+        public int Id=rnd.Next(0,250);
+        public DateTime Created;
+        public DateTime Modified;
+
+        public Entity()
+        {
+            Created = DateTime.Now;
+            Modified= DateTime.Now;
+        }
+        
+        
+    }
+
+    class Person : Entity
     {
-        
-        private string name;
-        public string color;
-        public string alias;
-        public string GetName()
+        private string Name { get; set; }
+        private int Age;
+
+        public Person(string name,int age)
         {
-            return name;
-            
-        }
-        
-        public void SetName(string name)
-        {
-            this.name = name + '*';
-        }
-        public Animal(string name)
-        {
-            this.name = name;
+            Name = name;
+            Age = age;
         }
 
-        public Animal(string name, string color)
+        public string GetName()
         {
-            Console.WriteLine("constructor");
-            this.name = name;
-            this.color = color;
+            return this.Name;
+        }
+        public virtual void Work()
+        {
+            Console.WriteLine("some random message from a person");
+            
+        }
+
+        public virtual string Work(string pub)
+        {
+            return pub;
         }
     }
 
+    class Librarian : Person 
+    {
+        public Librarian(string name, int age) : base(name, age)
+        {
+            
+        }
+        
+        public override void Work()
+        {
+            Console.WriteLine("Hello there!I see you are in some troubles with the books");
+            Console.WriteLine("Our librarian is called {0},",this.GetName());
+        }
+        
+    }
+
+    class Author : Person
+    {
+        private List<string> lspublication=new List<string>();
+        private int counter = 0;
+        public Author(string name,int age): base(name,age)
+        {
+               
+        }
+
+        public override string Work(string pub)
+        {
+            lspublication.Add(pub);
+            counter += 1;
+            return pub;
+        }
+    }
+
+    class Publication : Entity
+    {
+        private string Title;
+        private Author author;
+        private int NumberOfPages;
+
+        public Author Author
+        {
+            get
+            {
+                return author;
+            }
+            set
+            {
+                author = value;
+            }
+        }
+        public string title
+        {
+            get { return Title; }
+
+            set { Title = value; }
+            
+        }
+        
+        public Publication(string title,Author author,int nrpages)
+        {
+            this.Title = title;
+            this.author = author;
+            this.NumberOfPages = nrpages;
+        }
+    }
     class Program
     {
         static void Main(string[] args)
         {
-            Animal tiger = new Animal("Coll");
-            var anim1 = new Animal("Ryn", "black");
-            Console.WriteLine(anim1.color + anim1.name);
-            
-        
-        
-            Console.WriteLine("Destructor");
-            var newcat=new Animal{color ="ceva nume",alias ="grumpy cat"}
+            Librarian favLibrarian = new Librarian("Rares", 53);
+            Console.WriteLine(favLibrarian.Created);
+            Librarian secondLibrarian = new Librarian("Andrei", 30);
+            Librarian thirdLibrarian = new Librarian("Alex", 25);
+            Author firstAuthor = new Author("Radu", 30);
+            Author secondAuthor = new Author("Felix", 24);
+            Author thirdAuthor = new Author("Alexia", 22);
+            List<Author> lsAuthors = new List<Author>() {firstAuthor, secondAuthor, thirdAuthor};
+            List<Publication> lsPubs = new List<Publication>();
+            string s;
+            Console.WriteLine("Authors work 3 times");
+            Random rpages = new Random();
+            foreach (var item in lsAuthors)
+            {
+                for (int i = 0; i < 3; ++i)
+                {
+                    s = Console.ReadLine();
+                    lsPubs.Add(new Publication(s, item, rpages.Next(50,950)));
+                    item.Work(s);
+                }
+            }
+            Console.WriteLine();
+            List<Entity> lsEntities = new List<Entity>();
+            List<Librarian> lsLibrarians = new List<Librarian>() {favLibrarian, secondLibrarian, thirdLibrarian};
+            lsEntities.AddRange(lsLibrarians);
+            lsEntities.AddRange(lsAuthors);
+            lsEntities.AddRange(lsPubs);
+            Console.WriteLine();
+            Console.WriteLine("Iterating over the big list of entities");
+            Console.WriteLine(lsEntities);
+            foreach (var item in lsEntities)
+            {
+                Console.WriteLine(item.Id);
+                if (item is Librarian)
+                { 
+                    ((Librarian)item).Work();
+                }
+
+                if (item is Author)
+                {
+                    Console.WriteLine("We have an author, write his publication's title");
+                    s = Console.ReadLine();
+                    ((Author) item).Work(s);  // aici  noile  publicatii nu mai sunt adaugate in lista tutoror, doar in lista  indiv. a fiecarui autor
+                }
+
+                if (item is Publication)
+                {
+                    Console.WriteLine("This is a publication");
+                    Console.WriteLine(((Publication)item).title);
+                    Console.WriteLine(((Publication)item).Author.GetName());
+                    Console.WriteLine(((Publication)item).Created);
+                }
+                
+            }
+
         }
-           
-        
     }
 }
