@@ -40,9 +40,9 @@ namespace NiculescuRobert
             
         }
 
-        public virtual string Work(string pub)
+        public virtual Publication Work(string title,int NumberPages)
         {
-            return pub;
+            return null;
         }
     }
 
@@ -70,11 +70,10 @@ namespace NiculescuRobert
                
         }
 
-        public override string Work(string pub)
+        public override Publication Work(string title,int NumberPages)
         {
-            lspublication.Add(pub);
             counter += 1;
-            return pub;
+            return new Publication(title,this,NumberPages);
         }
     }
 
@@ -131,8 +130,9 @@ namespace NiculescuRobert
                 for (int i = 0; i < 3; ++i)
                 {
                     s = Console.ReadLine();
-                    lsPubs.Add(new Publication(s, item, rpages.Next(50,950)));
-                    item.Work(s);
+
+                    lsPubs.Add(item.Work(s,  rpages.Next(0, 250)));
+
                 }
             }
             Console.WriteLine();
@@ -154,9 +154,11 @@ namespace NiculescuRobert
 
                 if (item is Author)
                 {
-                    Console.WriteLine("We have an author, write his publication's title");
+                    Console.WriteLine("We have an author : {0}, write his publication's title",((Author)item).GetName());
                     s = Console.ReadLine();
-                    ((Author) item).Work(s);  // aici  noile  publicatii nu mai sunt adaugate in lista tutoror, doar in lista  indiv. a fiecarui autor
+                    Console.WriteLine("This author has made something new : {0}",
+                        ((Author) item).Work(s,rpages.Next(250, 950)).title);
+
                 }
 
                 if (item is Publication)
